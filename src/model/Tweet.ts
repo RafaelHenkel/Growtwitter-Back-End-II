@@ -38,7 +38,9 @@ class Tweet {
     }
   }
   showLikes() {
-    if (this.likes.length === 1) {
+    if (this.likes.length === 0) {
+      console.log(`[0 liked]`);
+    } else if (this.likes.length === 1) {
       console.log(`[@${this.likes[0].username} liked]`);
     } else if (this.likes.length === 1) {
       console.log(`[@${this.likes[0].username} more 1 user liked]`);

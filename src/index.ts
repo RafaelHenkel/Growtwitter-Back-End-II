@@ -13,8 +13,8 @@ const tweet1 = new Tweet("tweet de rafael", "RafaelHenkel", "Tweet");
 user1.sendTweet(tweet1);
 
 tweet1.reply("reply show de bola", "RafaelHenkel");
-tweet1.like(user2);
-tweet1.like(user1);
-tweet1.like(user3);
+// tweet1.like(user2);
+// tweet1.like(user1);
+// tweet1.like(user3);
 
 tweet1.show();
