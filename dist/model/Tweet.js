@@ -30,8 +30,21 @@ class Tweet {
     show() {
         console.log("------------------------------------");
         console.log(`@${this.user}: ${this.content}`);
-        this.showLikes();
-        this.showReplies();
+        for (let reply of this.replies) {
+            console.log(` > @${reply.user}: ${reply.content}`);
+        }
+        if (this.likes.length === 0) {
+            console.log(`[0 liked]`);
+        }
+        else if (this.likes.length === 1) {
+            console.log(`[@${this.likes[0].username} liked]`);
+        }
+        else if (this.likes.length === 1) {
+            console.log(`[@${this.likes[0].username} more 1 user liked]`);
+        }
+        else {
+            console.log(`[@${this.likes[0].username} more ${this.likes.length - 1} users liked]`);
+        }
     }
     showReplies() {
         for (let reply of this.replies) {

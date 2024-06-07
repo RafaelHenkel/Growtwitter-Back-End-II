@@ -1,14 +1,9 @@
 import { tweets } from "./database/Tweet.db";
-import { users } from "./database/Users.db";
 import { Tweet, User } from "./model";
 
 const user1 = new User("RafaelHenkel", "rafael@gmail.com", "1234567a");
 const user2 = new User("Rafael", "rafael234@gmail.com", "1234567a123");
-const user3 = new User(
-  "Rafaelllllllllllllllllll",
-  "rafaelllllllll234@gmail.com",
-  "1234567a123llll"
-);
+const user3 = new User("Rafaelll", "rafaellll234@gmail.com", "1234567a123ll");
 
 const tweet1 = new Tweet("tweet de rafaelHenkel", "RafaelHenkel", "Tweet");
 const tweet2 = new Tweet("tweet de rafael", "RafaelHenkel", "Tweet");
@@ -31,10 +26,13 @@ tweet3.tweetPost();
 
 //replyes de tweets
 tweet1.reply("reply show de bola", "RafaelHenkel");
+tweet1.reply("reply show de bola2", "RafaelHenkel");
 
 //curtir tweets
 tweet1.like(user2);
 tweet1.like(user1);
 tweet1.like(user3);
 
-user1.showTweets();
+// user1.showTweets();
+
+user2.showFeed();

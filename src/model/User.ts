@@ -37,7 +37,11 @@ class User {
       user.followers.push(this);
     }
   }
-  showFeed() {}
+  showFeed() {
+    this.followers.forEach((userFollow) =>
+      userFollow.tweets.forEach((tweet) => tweet.show())
+    );
+  }
   showTweets() {
     const userSearch = tweets.filter((user) => user.user === this.username);
     if (userSearch.length > 0) {
