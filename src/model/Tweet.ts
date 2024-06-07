@@ -19,7 +19,13 @@ class Tweet {
     const reply = new Tweet(content, user, "Reply");
     this.replies.push(reply);
   }
-  like(user: User) {}
+  like(user: User) {
+    if (this.likes.includes(user)) {
+      console.log("Error user already liked");
+    } else {
+      this.likes.push(user);
+    }
+  }
   show() {}
   showReplies() {}
   showLikes() {}
