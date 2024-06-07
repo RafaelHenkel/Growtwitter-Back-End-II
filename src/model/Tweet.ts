@@ -29,6 +29,7 @@ class Tweet {
   }
   show() {
     console.log(`@${this.user}: ${this.content}`);
+    this.showLikes();
     this.showReplies();
   }
   showReplies() {
@@ -36,7 +37,17 @@ class Tweet {
       console.log(` > @${reply.user}: ${reply.content}`);
     }
   }
-  showLikes() {}
+  showLikes() {
+    if (this.likes.length === 1) {
+      console.log(`[@${this.likes[0].username} liked]`);
+    } else if (this.likes.length === 1) {
+      console.log(`[@${this.likes[0].username} more 1 user liked]`);
+    } else {
+      console.log(
+        `[@${this.likes[0].username} more ${this.likes.length - 1} users liked]`
+      );
+    }
+  }
 }
 
 export default Tweet;
