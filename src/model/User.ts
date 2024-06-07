@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { Tweet } from ".";
 import { users } from "../database/Users.db";
+import { tweets } from "../database/Tweet.db";
 class User {
   private id: string;
   public username: string;
@@ -25,7 +26,7 @@ class User {
     }
   }
   sendTweet(tweet: Tweet) {
-    const newTweet = new Tweet("novo tweet", this.username, "Tweet");
+    const newTweet = new Tweet(tweet.content, this.username, "Tweet");
     this.tweets.push(newTweet);
   }
   follow(user: User) {
@@ -33,11 +34,13 @@ class User {
       console.log("Error you can't follow yourself");
     } else {
       console.log(`@${this.username} followed @${user.username}`);
-      this.followers.push(user);
+      user.followers.push(this);
     }
   }
   showFeed() {}
-  showTweets() {}
+  showTweets() {
+    tweets.forEach((tweet) => tweet.show());
+  }
 }
 
 export default User;

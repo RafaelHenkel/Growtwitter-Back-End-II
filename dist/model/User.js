@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid");
 const _1 = require(".");
+const Users_db_1 = require("../database/Users.db");
+const Tweet_db_1 = require("../database/Tweet.db");
 class User {
     constructor(username, email, password) {
         this.tweets = [];
@@ -10,10 +12,16 @@ class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        //PRECISA FAZER VERIFICACAO SE JA EXISTE O USUARIO!
+        const verifyUser = Users_db_1.users.find((user) => user.email === this.email || user.username === this.username);
+        if (verifyUser) {
+            console.log("Error user already register");
+        }
+        else {
+            Users_db_1.users.push(this);
+        }
     }
     sendTweet(tweet) {
-        const newTweet = new _1.Tweet("novo tweet", this.username, "Tweet");
+        const newTweet = new _1.Tweet(tweet.content, this.username, "Tweet");
         this.tweets.push(newTweet);
     }
     follow(user) {
@@ -22,10 +30,12 @@ class User {
         }
         else {
             console.log(`@${this.username} followed @${user.username}`);
-            this.followers.push(user);
+            user.followers.push(this);
         }
     }
     showFeed() { }
-    showTweets() { }
+    showTweets() {
+        Tweet_db_1.tweets.forEach((tweet) => tweet.show());
+    }
 }
 exports.default = User;

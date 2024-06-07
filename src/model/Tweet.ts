@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { User } from ".";
+import { tweets } from "../database/Tweet.db";
 
 class Tweet {
   private id: string;
@@ -15,6 +16,10 @@ class Tweet {
     this.user = user;
     this.type = type;
   }
+
+  tweetPost() {
+    tweets.push(this);
+  }
   reply(content: string, user: string) {
     const reply = new Tweet(content, user, "Reply");
     this.replies.push(reply);
@@ -28,6 +33,7 @@ class Tweet {
     }
   }
   show() {
+    console.log("------------------------------------");
     console.log(`@${this.user}: ${this.content}`);
     this.showLikes();
     this.showReplies();

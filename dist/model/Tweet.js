@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid");
+const Tweet_db_1 = require("../database/Tweet.db");
 class Tweet {
     constructor(content, user, type) {
         this.replies = [];
@@ -9,6 +10,9 @@ class Tweet {
         this.content = content;
         this.user = user;
         this.type = type;
+    }
+    tweetPost() {
+        Tweet_db_1.tweets.push(this);
     }
     reply(content, user) {
         const reply = new Tweet(content, user, "Reply");
@@ -24,6 +28,7 @@ class Tweet {
         }
     }
     show() {
+        console.log("------------------------------------");
         console.log(`@${this.user}: ${this.content}`);
         this.showLikes();
         this.showReplies();
