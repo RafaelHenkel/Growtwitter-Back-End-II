@@ -15,11 +15,12 @@ class Tweet {
         this.replies.push(reply);
     }
     like(user) {
-        this.likes.push(user);
+        //PRECISA ARRUMAR!
         if (this.likes.includes(user)) {
             console.log("Error user already liked");
         }
         else {
+            console.log(`${this.user} follow ${user.username}`);
             this.likes.push(user);
         }
     }

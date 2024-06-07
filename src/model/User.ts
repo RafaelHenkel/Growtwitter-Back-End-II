@@ -19,7 +19,14 @@ class User {
     const newTweet = new Tweet("novo tweet", this.username, "Tweet");
     this.tweets.push(newTweet);
   }
-  follow(user: User) {}
+  follow(user: User) {
+    if (user.username === this.username) {
+      console.log("Error you can't follow yourself");
+    } else {
+      console.log(`@${this.username} followed @${user.username}`);
+      this.followers.push(user);
+    }
+  }
   showFeed() {}
   showTweets() {}
 }
