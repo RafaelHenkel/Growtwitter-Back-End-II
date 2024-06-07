@@ -39,7 +39,12 @@ class User {
   }
   showFeed() {}
   showTweets() {
-    tweets.forEach((tweet) => tweet.show());
+    const userSearch = tweets.filter((user) => user.user === this.username);
+    if (userSearch.length > 0) {
+      userSearch.forEach((tweet) => tweet.show());
+    } else {
+      console.log("Error this user not post tweet");
+    }
   }
 }
 
