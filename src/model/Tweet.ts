@@ -26,8 +26,15 @@ class Tweet {
       this.likes.push(user);
     }
   }
-  show() {}
-  showReplies() {}
+  show() {
+    console.log(`@${this.user}: ${this.content}`);
+    this.showReplies();
+  }
+  showReplies() {
+    for (let reply of this.replies) {
+      console.log(` > @${reply.user}: ${reply.content}`);
+    }
+  }
   showLikes() {}
 }
 
