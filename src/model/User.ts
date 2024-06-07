@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { Tweet } from ".";
+import { users } from "../database/Users.db";
 class User {
   private id: string;
   public username: string;
@@ -13,7 +14,15 @@ class User {
     this.username = username;
     this.email = email;
     this.password = password;
-    //PRECISA FAZER VERIFICACAO SE JA EXISTE O USUARIO!
+
+    const verifyUser = users.find(
+      (user) => user.email === this.email || user.username === this.username
+    );
+    if (verifyUser) {
+      console.log("Error user already register");
+    } else {
+      users.push(this);
+    }
   }
   sendTweet(tweet: Tweet) {
     const newTweet = new Tweet("novo tweet", this.username, "Tweet");
