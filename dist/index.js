@@ -1,2 +1,10 @@
 "use strict";
-console.log("hello");
+Object.defineProperty(exports, "__esModule", { value: true });
+const model_1 = require("./model");
+const user1 = new model_1.User("RafaelHenkel", "rafael@gmail.com", "1234567a");
+const tweet1 = new model_1.Tweet("tweet de rafael", "RafaelHenkel", "Tweet");
+user1.sendTweet(tweet1);
+tweet1.like(user1);
+console.log(user1.tweets);
+tweet1.reply("reply show de bola", "RafaelHenkel");
+tweet1.show();

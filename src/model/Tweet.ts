@@ -20,6 +20,7 @@ class Tweet {
     this.replies.push(reply);
   }
   like(user: User) {
+    //PRECISA ARRUMAR!
     if (this.likes.includes(user)) {
       console.log("Error user already liked");
     } else {

@@ -15,7 +15,10 @@ class User {
     this.password = password;
     //PRECISA FAZER VERIFICACAO SE JA EXISTE O USUARIO!
   }
-  sendTweet(tweet: Tweet) {}
+  sendTweet(tweet: Tweet) {
+    const newTweet = new Tweet("novo tweet", this.username, "Tweet");
+    this.tweets.push(newTweet);
+  }
   follow(user: User) {}
   showFeed() {}
   showTweets() {}
