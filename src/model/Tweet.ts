@@ -15,7 +15,10 @@ class Tweet {
     this.user = user;
     this.type = type;
   }
-  reply(content: Tweet) {}
+  reply(content: string, user: string) {
+    const reply = new Tweet(content, user, "Reply");
+    this.replies.push(reply);
+  }
   like(user: User) {}
   show() {}
   showReplies() {}
