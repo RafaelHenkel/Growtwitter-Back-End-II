@@ -30,21 +30,8 @@ class Tweet {
     show() {
         console.log("------------------------------------");
         console.log(`@${this.user}: ${this.content}`);
-        for (let reply of this.replies) {
-            console.log(` > @${reply.user}: ${reply.content}`);
-        }
-        if (this.likes.length === 0) {
-            console.log(`[0 liked]`);
-        }
-        else if (this.likes.length === 1) {
-            console.log(`[@${this.likes[0].username} liked]`);
-        }
-        else if (this.likes.length === 1) {
-            console.log(`[@${this.likes[0].username} more 1 user liked]`);
-        }
-        else {
-            console.log(`[@${this.likes[0].username} more ${this.likes.length - 1} users liked]`);
-        }
+        this.showLikes();
+        this.showReplies();
     }
     showReplies() {
         for (let reply of this.replies) {
@@ -56,13 +43,13 @@ class Tweet {
             console.log(`[0 liked]`);
         }
         else if (this.likes.length === 1) {
-            console.log(`[@${this.likes[0].username} liked]`);
+            console.log(`[@${this.likes[0]} liked]`);
         }
         else if (this.likes.length === 1) {
-            console.log(`[@${this.likes[0].username} more 1 user liked]`);
+            console.log(`[@${this.likes[0]} more 1 user liked]`);
         }
         else {
-            console.log(`[@${this.likes[0].username} more ${this.likes.length - 1} users liked]`);
+            console.log(`[@${this.likes[0]} more ${this.likes.length - 1} users liked]`);
         }
     }
 }

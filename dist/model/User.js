@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid");
-const _1 = require(".");
 const Users_db_1 = require("../database/Users.db");
 const Tweet_db_1 = require("../database/Tweet.db");
 class User {
     constructor(username, email, password) {
         this.tweets = [];
         this.followers = [];
+        this.following = [];
         this.id = (0, uuid_1.v4)();
         this.username = username;
         this.email = email;
@@ -21,8 +21,7 @@ class User {
         }
     }
     sendTweet(tweet) {
-        const newTweet = new _1.Tweet(tweet.content, this.username, "Tweet");
-        this.tweets.push(newTweet);
+        this.tweets.push(tweet);
     }
     follow(user) {
         if (user.username === this.username) {
@@ -31,10 +30,29 @@ class User {
         else {
             console.log(`@${this.username} followed @${user.username}`);
             user.followers.push(this);
+            this.following.push(user);
         }
     }
     showFeed() {
-        this.followers.forEach((userFollow) => userFollow.tweets.forEach((tweet) => tweet.show()));
+        // tweets.forEach((tweet) => tweet.show())
+        const myTweets = Tweet_db_1.tweets.filter((tweetUser) => tweetUser.user === this.username);
+        if (myTweets.length > 0) {
+            console.log("------------------------------------");
+            console.log("my tweets");
+            myTweets.forEach((tweet) => tweet.show());
+        }
+        else {
+            console.log("------------------------------------");
+            console.log("User tweets not found!");
+        }
+        console.log("------------------------------------");
+        if (this.following.length < 0) {
+            console.log("following feed");
+            this.following.forEach((user) => user.tweets.forEach((tweet) => tweet.show()));
+        }
+        else {
+            console.log("This user does not follow anyone");
+        }
     }
     showTweets() {
         const userSearch = Tweet_db_1.tweets.filter((user) => user.user === this.username);

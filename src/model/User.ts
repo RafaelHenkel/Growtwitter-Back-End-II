@@ -9,6 +9,7 @@ class User {
   private password: string;
   public tweets: Tweet[] = [];
   public followers: User[] = [];
+  public following: User[] = [];
 
   constructor(username: string, email: string, password: string) {
     this.id = uuid();
@@ -26,8 +27,7 @@ class User {
     }
   }
   sendTweet(tweet: Tweet) {
-    const newTweet = new Tweet(tweet.content, this.username, "Tweet");
-    this.tweets.push(newTweet);
+    this.tweets.push(tweet);
   }
   follow(user: User) {
     if (user.username === this.username) {
@@ -35,12 +35,30 @@ class User {
     } else {
       console.log(`@${this.username} followed @${user.username}`);
       user.followers.push(this);
+      this.following.push(user);
     }
   }
   showFeed() {
-    this.followers.forEach((userFollow) =>
-      userFollow.tweets.forEach((tweet) => tweet.show())
+    const myTweets = tweets.filter(
+      (tweetUser) => tweetUser.user === this.username
     );
+    if (myTweets.length > 0) {
+      console.log("------------------------------------");
+      console.log("my tweets");
+      myTweets.forEach((tweet) => tweet.show());
+    } else {
+      console.log("------------------------------------");
+      console.log("User tweets not found!");
+    }
+    console.log("------------------------------------");
+    if (this.following.length < 0) {
+      console.log("following feed");
+      this.following.forEach((user) =>
+        user.tweets.forEach((tweet) => tweet.show())
+      );
+    } else {
+      console.log("This user does not follow anyone");
+    }
   }
   showTweets() {
     const userSearch = tweets.filter((user) => user.user === this.username);

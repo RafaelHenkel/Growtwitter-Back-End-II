@@ -8,7 +8,7 @@ class Tweet {
   public user: string;
   protected type?: "Tweet" | "Reply";
   public replies: Tweet[] = [];
-  public likes: User[] = [];
+  public likes: string[] = [];
 
   constructor(content: string, user: string, type: "Tweet" | "Reply") {
     this.id = uuid();
@@ -24,7 +24,7 @@ class Tweet {
     const reply = new Tweet(content, user, "Reply");
     this.replies.push(reply);
   }
-  like(user: User) {
+  like(user: string) {
     //PRECISA ARRUMAR!
     if (this.likes.includes(user)) {
       console.log("Error user already liked");
@@ -47,12 +47,12 @@ class Tweet {
     if (this.likes.length === 0) {
       console.log(`[0 liked]`);
     } else if (this.likes.length === 1) {
-      console.log(`[@${this.likes[0].username} liked]`);
+      console.log(`[@${this.likes[0]} liked]`);
     } else if (this.likes.length === 1) {
-      console.log(`[@${this.likes[0].username} more 1 user liked]`);
+      console.log(`[@${this.likes[0]} more 1 user liked]`);
     } else {
       console.log(
-        `[@${this.likes[0].username} more ${this.likes.length - 1} users liked]`
+        `[@${this.likes[0]} more ${this.likes.length - 1} users liked]`
       );
     }
   }
